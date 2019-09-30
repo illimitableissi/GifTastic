@@ -16,9 +16,9 @@ function createButtons () {
     }    
 }   
 
-//Function produces gifs and rating on click
+//Function produces gifs, rating, and title on button click
 function clickAction() {
-    
+    //Ajax call 
     $(".btn-info").on("click", function(event) {
         event.preventDefault();
         var characterName =$(this).attr("data-topic")
@@ -28,10 +28,10 @@ function clickAction() {
         url: queryURL,
         method: "GET"
     }).then(function(response) {
-
         var results = response.data;
         //Loops through data array
         for (var g = 0; g < results.length; g++) {
+            //Creates img div for gif urls
             var gifs = $("<img>");
             gifs.addClass("card-img-top");
             gifs.attr("src", results[g].images.fixed_height_still.url);
@@ -39,14 +39,21 @@ function clickAction() {
             gifs.attr("data-animate", results[g].images.fixed_height.url);
             gifs.attr("data-state", "still");
             var rating = results[g].rating;
+            var title = results[g].title;
             var p = $("<p>")
+            var pTwo = $("<p>")
             p.addClass("card-text text-center")
-            p.text("Rating: " + rating);         
+            pTwo.addClass("card-text text-center")
+            p.text("Rating: " + rating);
+            pTwo.text("Title: " + title);
+            //appends img and p tags to HTML gifs div          
             $("#gifs").append(gifs)
-            $("#gifs").append(p) 
+            $("#gifs").append(p)
+            $("#gifs").append(pTwo)
     
+            //Function controls gif functionality on click
             $(gifs).on("click", function() {
-                // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                //pulls state of gif into a variable
                 var state = $(this).attr("data-state");          
                 // If the clicked image's state is still, update its src attribute to what its data-animate value is.
                 if (state === "still") {
@@ -58,11 +65,12 @@ function clickAction() {
                   $(this).attr("src", $(this).attr("data-still"));
                   $(this).attr("data-state", "still");
                     }
-                   var confirmClick = confirm("Do want want to make this gif a favorite?");
-                    if (confirmClick) {
-                        var favoriteImg = $("<img>")
-                        favoriteImg.attr("src", $(this).attr("src"))
-                        $("#favorites").append(favoriteImg)
+                //Confirms if user wants to add gif to favorites
+                var confirmClick = confirm("Do you want to make this gif a favorite?");
+                if (confirmClick) {
+                    var favoriteImg = $("<img>")
+                    favoriteImg.attr("src", $(this).attr("src"))
+                    $("#favorites").append(favoriteImg)
                    }
                 })
             }  

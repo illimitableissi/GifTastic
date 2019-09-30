@@ -1,5 +1,5 @@
 //Array for One-Piece topic
-var topics = ["luffy", "roronoa zoro", "usopp", "nami", "shanks", "portgas d. ace", "monkey d. garp", "sanji", "akainu", "kuzan", "dracule mihawk", "enel", "sabo"]
+var topics = ["luffy", "roronoa zoro", "usopp", "nami", "shanks", "portgas d. ace", "monkey d. garp", "sanji", "akainu", "kuzan", "dracule mihawk", "enel", "sabo"," tony tony chopper"]
 
 //Function to create buttons on HTML
 function createButtons () {
@@ -9,7 +9,7 @@ function createButtons () {
     //For loop to produce buttons from array
     for (var i = 0; i < topics.length; i++) {
         var topicButtons = $("<button>");
-        topicButtons.addClass("topic-button");
+        topicButtons.addClass("btn btn-info");
         topicButtons.attr("data-topic", topics[i])
         topicButtons.text(topics[i]);
         $('#buttons').append(topicButtons)
@@ -19,7 +19,7 @@ function createButtons () {
 //Function produces gifs and rating on click
 function clickAction() {
     
-    $(".topic-button").on("click", function(event) {
+    $(".btn-info").on("click", function(event) {
         event.preventDefault();
         var characterName =$(this).attr("data-topic")
         var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=kVuH86l1irJhDIHRaV7trtaOBiICrbNu&limit=10&q=" + characterName
@@ -35,9 +35,9 @@ function clickAction() {
             var gifs = $("<img>");
             gifs.attr("src", results[g].images.fixed_height.url);
             var rating = results[g].rating;
-            var p = $("<p>").text("Rating: " + rating);          
-            $("#gifs").append(gifs)
-            $("#gifs").append(p)
+            var p = $("<p>").text("Rating: " + rating);
+            $("#gifs").append(p)          
+            $("#gifs").append(gifs)     
             }  
         });
     });
@@ -52,7 +52,7 @@ function clickAction() {
         createButtons()
         clickAction()
         })
-        
+
 //invokes functions
 createButtons();
 clickAction();

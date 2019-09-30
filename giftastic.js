@@ -33,41 +33,36 @@ function clickAction() {
         //Loops through data array
         for (var g = 0; g < results.length; g++) {
             var gifs = $("<img>");
+            gifs.addClass("card-img-top");
             gifs.attr("src", results[g].images.fixed_height_still.url);
             gifs.attr("data-still", results[g].images.fixed_height_still.url);
             gifs.attr("data-animate", results[g].images.fixed_height.url);
             gifs.attr("data-state", "still");
             var rating = results[g].rating;
             var p = $("<p>")
-            p.addClass("card-text")
-            p.text("Rating: " + rating);
-            $("#gifs").append(p)          
+            p.addClass("card-text text-center")
+            p.text("Rating: " + rating);         
             $("#gifs").append(gifs)
+            $("#gifs").append(p) 
     
             $(gifs).on("click", function() {
-                console.log(this)
                 // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-                var state = $(this).attr("data-state");
+                var state = $(this).attr("data-state");          
                 // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                // Then, set the image's data-state to animate
-                // Else set src to the data-still value
                 if (state === "still") {
                   $(this).attr("src", $(this).attr("data-animate"));
+                  // Then, set the image's data-state to animate
                   $(this).attr("data-state", "animate");
+                // Else set src to the data-still value
                 } else {
                   $(this).attr("src", $(this).attr("data-still"));
                   $(this).attr("data-state", "still");
-                }
-             })
+                    }
+                })
             }  
         });
     });
 }
-
-
-  
-
-
 
 //Creates new button from user input
     $("#find-character").on("click", function(event) {

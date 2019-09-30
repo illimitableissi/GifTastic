@@ -58,6 +58,12 @@ function clickAction() {
                   $(this).attr("src", $(this).attr("data-still"));
                   $(this).attr("data-state", "still");
                     }
+                   var confirmClick = confirm("Do want want to make this gif a favorite?");
+                    if (confirmClick) {
+                        var favoriteImg = $("<img>")
+                        favoriteImg.attr("src", $(this).attr("src"))
+                        $("#favorites").append(favoriteImg)
+                   }
                 })
             }  
         });

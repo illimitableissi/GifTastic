@@ -32,13 +32,13 @@ var results = response.data;
 
 for (var g = 0; g < results.length; g++) {
 
-    console.log(results[g].url)
+    console.log(results[g].images.fixed_height.url)
 
 var gifs = $("<img>")
 var rating = results[g].rating
 var p = $("<p>").text("Rating: " + rating);
 
-gifs.attr("src", results[g].url);
+gifs.attr("src", results[g].images.fixed_height.url);
 
 
 $("#gifs").append(gifs)

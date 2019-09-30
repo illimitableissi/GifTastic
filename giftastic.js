@@ -1,25 +1,27 @@
 //Array for One-Piece topic
-var topics = ["luffy", "zorro", "usopp", "nami", "shanks", "white-beard", "garp", "sanji", "kaido", "akainu", "kuzan", "hawkeye mihawk", "enel", "sabo"]
+var topics = ["luffy", "roronoa zoro", "usopp", "nami", "shanks", "portgas d. ace", "monkey d. garp", "sanji", "akainu", "kuzan", "dracule mihawk", "enel", "sabo"]
+
+function createButtons () {
+
+    $("#buttons").empty();
 
 //For loop to produce buttons for strings
-for (var i = 0; i < topics.length; i++) {
+    for (var i = 0; i < topics.length; i++) {
     
- var topicButtons = $("<button>");
- topicButtons.addClass("topic-button");
- topicButtons.attr("data-topic", topics[i])
- topicButtons.text(topics[i]);
- $('#buttons').append(topicButtons)
-}
+        var topicButtons = $("<button>");
+        topicButtons.addClass("topic-button");
+        topicButtons.attr("data-topic", topics[i])
+        topicButtons.text(topics[i]);
+        $('#buttons').append(topicButtons)
+    }       
 
 //Defines function on click
-$(".topic-button").on("click", function (event) {
+    $(".topic-button").on("click", function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-var characterName =$(this).attr("data-topic")
-    
-    //retrieves data from GIPHY
-var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=kVuH86l1irJhDIHRaV7trtaOBiICrbNu&limit=10&q=" + characterName
+    var characterName =$(this).attr("data-topic")
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=kVuH86l1irJhDIHRaV7trtaOBiICrbNu&limit=10&q=" + characterName
 
 $.ajax({
     url: queryURL,
@@ -47,8 +49,14 @@ $("#gifs").append(p)
 }
 
 });
-
-
 });
+}
+//Creates new button from user input
+    $("#find-character").on("click", function(event) {
+        event.preventDefault();
+        var input = $("#user-input").val().trim();
+        topics.push(input);
+        createButtons()
+        })
 
-
+createButtons()

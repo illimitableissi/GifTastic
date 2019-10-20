@@ -1,4 +1,4 @@
-#gifs, #input, #favorites{
+#input{
     background-color: azure
 }
 
@@ -8,4 +8,10 @@
 
 body{
     background-image: url(onepiece.jpg)
+}
+
+h6{
+    color: red;
+    background-color: black;
+    text-align: center;
 }

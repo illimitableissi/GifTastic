@@ -22,7 +22,7 @@ function clickAction() {
     $(".btn-info").on("click", function(event) {
         event.preventDefault();
         var characterName =$(this).attr("data-topic")
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=kVuH86l1irJhDIHRaV7trtaOBiICrbNu&limit=10&q=" + characterName
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=kVuH86l1irJhDIHRaV7trtaOBiICrbNu&limit=5&q=" + characterName
 
     $.ajax({
         url: queryURL,
@@ -33,6 +33,11 @@ function clickAction() {
         for (var g = 0; g < results.length; g++) {
             //Creates img div for gif urls
             var gifs = $("<img>");
+            var card = $("<div>")
+            card.addClass("card")
+            card.attr("style", "width: 18rem;")
+            var cardBody = $("<div>")
+            cardBody.addClass("card-body")
             gifs.addClass("card-img-top");
             gifs.attr("src", results[g].images.fixed_height_still.url);
             gifs.attr("data-still", results[g].images.fixed_height_still.url);
@@ -47,9 +52,14 @@ function clickAction() {
             p.text("Rating: " + rating);
             pTwo.text("Title: " + title);
             //appends img and p tags to HTML gifs div          
-            $("#gifs").append(gifs)
-            $("#gifs").append(p)
-            $("#gifs").append(pTwo)
+            card.append(gifs)
+            cardBody.append(p)
+            cardBody.append(pTwo)
+            card.append(cardBody)
+            $("#gifs").append(card, "<br>")
+        
+        
+         
     
             //Function controls gif functionality on click
             $(gifs).on("click", function() {
@@ -72,7 +82,7 @@ function clickAction() {
                     favoriteImg.attr("src", $(this).attr("src"))
                     $("#favorites").append(favoriteImg)
                    }
-                })
+            })
             }  
         });
     });
